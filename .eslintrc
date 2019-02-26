@@ -1,8 +1,34 @@
 {
-  "extends": ["taro"],
+  "extends": [
+    "taro"
+  ],
   "rules": {
-    "no-unused-vars": ["error", { "varsIgnorePattern": "Taro" }],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }]
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "Taro"
+      }
+    ],
+    // 限制文件后缀
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".tsx"
+        ]
+      }
+    ],
+    // jsx 的开始和闭合处禁止有空格
+    "react/jsx-tag-spacing": [
+      "error",
+      {
+        "closingSlash": "never",
+        "beforeSelfClosing": "allow",
+        "afterOpening": "never"
+      }
+    ]
   },
   "parser": "babel-eslint"
 }
