@@ -20,7 +20,8 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/index/index'
+      'pages/index/index',
+      'pages/details/index',
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -30,7 +31,9 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {}
+  componentDidMount () {
+    console.log(this.$router.params)
+  }
 
   componentDidShow () {}
 

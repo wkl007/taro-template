@@ -6,7 +6,6 @@ import { add, minus, asyncAdd } from '../../actions/counter'
 
 import './index.less'
 
-
 @connect(({ counter }) => ({
   counter
 }), (dispatch) => ({
@@ -22,19 +21,40 @@ import './index.less'
 }))
 class Index extends Component {
 
-    config = {
-    navigationBarTitleText: '首页'
+  config = {
+    navigationBarTitleText: '这是首页'
   }
 
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
 
-  componentWillUnmount () { }
+  componentWillMount () {
+    console.log('首页will mount')
+  }
 
-  componentDidShow () { }
+  componentDidMount () {
+    console.log('首页did mount')
+  }
 
-  componentDidHide () { }
+  componentWillUnmount () {
+    console.log('首页will unmount')
+  }
+
+  componentDidShow () {
+    console.log('首页show')
+  }
+
+  componentDidHide () {
+    console.log('首页hide')
+  }
+
+  goDetails = (id, e) => {
+    console.log(id, e)
+    Taro.navigateTo({
+      url: `/pages/details/index?id=${id}`
+    })
+  }
 
   render () {
     return (
@@ -44,6 +64,7 @@ class Index extends Component {
         <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
         <View><Text>{this.props.counter.num}</Text></View>
         <View><Text>Hello, World</Text></View>
+        <Button onClick={this.goDetails.bind(this, '1234')}>跳转到详情页面</Button>
       </View>
     )
   }
