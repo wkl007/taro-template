@@ -1,14 +1,20 @@
 const config = {
+  // 项目名称
   projectName: 'taro-weapp',
+  // 项目创建日期
   date: '2019-2-26',
+  // 设计稿尺寸
   designWidth: 750,
   deviceRatio: {
     '640': 2.34 / 2,
     '750': 1,
     '828': 1.81 / 2
   },
+  // 项目源码目录
   sourceRoot: 'src',
+  // 项目产出目录
   outputRoot: 'dist',
+  // 通用插件配置
   plugins: {
     babel: {
       sourceMap: true,
@@ -24,14 +30,14 @@ const config = {
       ]
     }
   },
-  defineConstants: {
-  },
+  // 全局变量设置
+  defineConstants: {},
+  // 文件 copy 配置
   copy: {
-    patterns: [
-    ],
-    options: {
-    }
+    patterns: [],
+    options: {}
   },
+  // 小程序端专用配置
   weapp: {
     module: {
       postcss: {
@@ -47,9 +53,7 @@ const config = {
         },
         pxtransform: {
           enable: true,
-          config: {
-
-          }
+          config: {}
         },
         url: {
           enable: true,
@@ -67,6 +71,7 @@ const config = {
       }
     }
   },
+  // H5 端专用配置
   h5: {
     publicPath: '/',
     staticDirectory: 'static',
@@ -90,7 +95,8 @@ const config = {
           }
         }
       }
-    }
+    },
+    esnextModules: ['taro-ui']
   }
 }
 

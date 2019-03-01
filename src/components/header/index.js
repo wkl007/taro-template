@@ -1,6 +1,7 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
+import { AtAvatar } from 'taro-ui'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
 
@@ -49,12 +50,13 @@ class Details extends Component {
     console.log('详情页面hide')
   }
 
-
   render () {
     return (
       <View className='index'>
-
-        <View><Text>详情页面</Text></View>
+        <AtAvatar image='https://jdc.jd.com/img/200'/>
+        <AtAvatar text='凹凸实验室'/>
+        <AtAvatar circle image='https://jdc.jd.com/img/200'/>
+        <AtAvatar circle text='凹凸实验室'/>
       </View>
     )
   }
