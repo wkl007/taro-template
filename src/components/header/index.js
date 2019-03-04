@@ -27,27 +27,27 @@ class Details extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
+    // console.log(this.props, nextProps)
   }
 
   componentWillMount () {
-    console.log('详情页面will mount')
+    // console.log('详情页面will mount')
   }
 
   componentDidMount () {
-    console.log('详情页面did mount')
+    // console.log('详情页面did mount')
   }
 
   componentWillUnmount () {
-    console.log('详情页面will unmount')
+    // console.log('详情页面will unmount')
   }
 
   componentDidShow () {
-    console.log('详情页面show')
+    // console.log('详情页面show')
   }
 
   componentDidHide () {
-    console.log('详情页面hide')
+    // console.log('详情页面hide')
   }
 
   render () {
