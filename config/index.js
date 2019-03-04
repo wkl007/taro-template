@@ -1,3 +1,9 @@
+const path = require('path')
+
+function resolve (dir) {
+  return path.resolve(__dirname, '..', dir)
+}
+
 const config = {
   // 项目名称
   projectName: 'taro-weapp',
@@ -28,10 +34,28 @@ const config = {
         'transform-class-properties',
         'transform-object-rest-spread'
       ]
+    },
+    //压缩js
+    uglify: {
+      enable: true,
+      config: {
+        // 配置项同 https://github.com/mishoo/UglifyJS2#minify-options
+      }
+    },
+    //压缩css
+    csso: {
+      enable: true,
+      config: {
+        // 配置项同 https://github.com/css/csso#minifysource-options
+      }
     }
   },
   // 全局变量设置
   defineConstants: {},
+  // 目录别名设置
+  alias: {
+    '@/components': resolve('src/components')
+  },
   // 文件 copy 配置
   copy: {
     patterns: [],
@@ -39,6 +63,9 @@ const config = {
   },
   // 小程序端专用配置
   weapp: {
+    compile: {
+      compressTemplate: true,//打包时是否需要压缩 wxml
+    },
     module: {
       postcss: {
         autoprefixer: {

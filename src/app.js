@@ -28,6 +28,16 @@ class App extends Component {
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
+    },
+    'plugins': {
+      'wxparserPlugin': {
+        'version': '0.2.1',
+        'provider': 'wx9d4d4ffa781ff3ac'
+      }
+    },
+    usingComponents: {
+      'wxparser': 'plugin://wxparserPlugin/wxparser',
+
     }
   }
 

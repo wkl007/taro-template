@@ -2,7 +2,7 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "taro-weapp",
 	"description": "",
-	"appid": "wxa4b0ec5e773910fc",
+	"appid": "wxc71f4ad221b5b5aa",
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
@@ -13,5 +13,33 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.6.1",
-	"condition": {}
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "详情页面",
+					"pathName": "pages/details/index",
+					"query": "id=1234&__key_=15516885495031",
+					"scene": null
+				}
+			]
+		}
+	}
 }
