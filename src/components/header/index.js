@@ -26,6 +26,30 @@ class Header extends Component {
     navigationBarTitleText: '这是详情'
   }
 
+  componentWillReceiveProps (nextProps) {
+    // console.log(this.props, nextProps)
+  }
+
+  componentWillMount () {
+    // console.log('详情页面will mount')
+  }
+
+  componentDidMount () {
+    // console.log('详情页面did mount')
+  }
+
+  componentWillUnmount () {
+    // console.log('详情页面will unmount')
+  }
+
+  componentDidShow () {
+    // console.log('详情页面show')
+  }
+
+  componentDidHide () {
+    // console.log('详情页面hide')
+  }
+
   render () {
     return (
       <View className='index'>

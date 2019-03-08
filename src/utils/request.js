@@ -21,31 +21,39 @@ const codeMessage = {
 
 const baseURL = process.env.BASE_URL
 
-//请求拦截器
-const interceptor = function (chain) {
-  const requestParams = chain.requestParams
-  const { method, data, url } = requestParams
-  console.log(`http ${method || 'GET'} --> ${url} data: `, data)
-
-  return chain.proceed(requestParams)
-    .then(res => {
-      console.log(`http <-- ${url} result:`, res)
-      return res
-    })
+/**
+ * 状态检查
+ * @param response
+ * @returns {*}
+ */
+function checkStatus (response) {
+  const { statusCode, data } = response
+  if (statusCode >= 200 && statusCode < 300) {
+    return data
+  }
+  const errorText = codeMessage[statusCode]
+  const error = new Error(errorText)
+  error.name = statusCode
+  error.response = response
+  throw error
 }
 
 export default function request (options) {
   const { url, method = 'get', data } = options
-
   return Taro.request({
     url: isUrl(url) ? url : `${baseURL}${url}`,
     method: method.toUpperCase(),
     data
-  }).then(res => {
-    const { statusCode, data } = res
-    console.log(res)
-
-  }).catch(err => {
-    console.log(err)
-  })
+  }).then(checkStatus)
+    .then(res => {
+      const { status, data } = res
+      if (status === 1) {
+        return data
+      } else {
+        return Promise.reject(res)
+      }
+    })
+    .catch(err => {
+      return Promise.reject(err)
+    })
 }

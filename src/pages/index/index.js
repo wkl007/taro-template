@@ -267,8 +267,10 @@ class Index extends Component {
   componentDidMount () {
     // console.log('首页did mount')
     getBannerList().then(res => {
-
-    }).catch(err => {})
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
     /*Taro.showToast({
       title: '成功',
       icon: 'loading',
@@ -304,7 +306,7 @@ class Index extends Component {
   }*/
 
   goDetails = (id, e) => {
-    console.log(id, e)
+    // console.log(id, e)
     Taro.navigateTo({
       url: `/pages/details/index?id=${id}`
     })
@@ -323,11 +325,11 @@ class Index extends Component {
   }
 
   onSubmit (event) {
-    console.log(this.state)
+    // console.log(this.state)
   }
 
   onReset (event) {
-    console.log(event)
+    // console.log(event)
   }
 
   render () {
