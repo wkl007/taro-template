@@ -3,7 +3,7 @@ import { View } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { AtAvatar } from 'taro-ui'
 
-import { add, minus, asyncAdd } from '../../actions/counter'
+import { add, minus, asyncAdd } from '../../redux/actions/counter'
 
 import './index.less'
 
@@ -20,34 +20,10 @@ import './index.less'
     dispatch(asyncAdd())
   }
 }))
-class Details extends Component {
+class Header extends Component {
 
   config = {
     navigationBarTitleText: '这是详情'
-  }
-
-  componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
-  }
-
-  componentWillMount () {
-    console.log('详情页面will mount')
-  }
-
-  componentDidMount () {
-    console.log('详情页面did mount')
-  }
-
-  componentWillUnmount () {
-    console.log('详情页面will unmount')
-  }
-
-  componentDidShow () {
-    console.log('详情页面show')
-  }
-
-  componentDidHide () {
-    console.log('详情页面hide')
   }
 
   render () {
@@ -62,4 +38,4 @@ class Details extends Component {
   }
 }
 
-export default Details
+export default Header

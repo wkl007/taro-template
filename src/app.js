@@ -1,10 +1,10 @@
 import '@tarojs/async-await'
 import Taro, { Component } from '@tarojs/taro'
-import { Provider } from '@tarojs/redux'
-
+import { Provider, connect } from '@tarojs/redux'
 import Index from './pages/index'
+import actions from './redux/actions'
+import configStore from './redux/store'
 
-import configStore from './store'
 
 import './app.scss'
 
@@ -16,12 +16,18 @@ import './app.scss'
 
 const store = configStore()
 
+@connect(({  isIpx }) => ({
+  isIpx
+}), (dispatch) => ({
+  setIsIpx: data => dispatch(actions.setIsIpx(data)),
+}))
 class App extends Component {
 
   config = {
     pages: [
       'pages/index/index',
       'pages/details/index',
+      'pages/redux/index',
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -42,7 +48,7 @@ class App extends Component {
   }
 
   componentDidMount () {
-    console.log(this.$router.params)
+    console.log(this.$router.params, this.props)
   }
 
   componentDidShow () {}

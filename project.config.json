@@ -30,13 +30,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "详情页面",
 					"pathName": "pages/details/index",
 					"query": "id=1234&__key_=15516885495031",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "redux测试",
+					"pathName": "pages/redux/index",
 					"scene": null
 				}
 			]
