@@ -1,10 +1,10 @@
 import '@tarojs/async-await'
 import Taro, { Component } from '@tarojs/taro'
-import { Provider, connect } from '@tarojs/redux'
+import { Provider } from '@tarojs/redux'
 import Index from './pages/index'
-import actions from './redux/actions'
 import configStore from './redux/store'
-
+import { loadData, saveData, IS_IPHONEX, LOGIN_STATUS } from './utils/catche'
+import { taroGetSystemInfo } from './utils/taroUtils'
 
 import './app.scss'
 
@@ -16,11 +16,6 @@ import './app.scss'
 
 const store = configStore()
 
-@connect(({  isIpx }) => ({
-  isIpx
-}), (dispatch) => ({
-  setIsIpx: data => dispatch(actions.setIsIpx(data)),
-}))
 class App extends Component {
 
   config = {
@@ -43,21 +38,37 @@ class App extends Component {
     },
     usingComponents: {
       'wxparser': 'plugin://wxparserPlugin/wxparser',
-
     }
   }
 
   componentDidMount () {
-    console.log(this.$router.params, this.props)
+    console.log(this.$router.params)
+    // this.checkLoginStatus()
+    this.isIphoneX()
   }
 
-  componentDidShow () {}
+  checkLoginStatus = () => {
+    let loginStatus = loadData(LOGIN_STATUS)
+    if (!loginStatus) {
+      Taro.reLaunch({
+        url: `/pages/details/index`
+      })
+    }
+  }
 
-  componentDidHide () {}
-
-  componentCatchError () {}
-
-  componentDidCatchError () {}
+  isIphoneX = () => {
+    let isIpx = loadData(IS_IPHONEX)
+    taroGetSystemInfo().then(res => {
+      const deviceModel = 'iPhone X'
+      let flag = false
+      if (res.model.indexOf(deviceModel) > -1) {
+        flag = true
+      }
+      if (isIpx !== flag) {
+        saveData(IS_IPHONEX, flag)
+      }
+    }).catch(err => {})
+  }
 
   // 在 App 类中的 render() 函数没有实际作用
   // 请勿修改此函数

@@ -1,7 +1,7 @@
 import Types from '../../constants'
 import { loadData, IS_IPHONEX } from '../../../utils/catche'
 
-const defaultState = loadData(IS_IPHONEX)
+const defaultState = loadData(IS_IPHONEX) || false
 /**
  * state树
  * isIpx:true Boolean

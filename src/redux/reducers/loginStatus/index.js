@@ -1,7 +1,7 @@
 import Types from '../../constants'
 import { loadData, LOGIN_STATUS } from '../../../utils/catche'
 
-const defaultState = loadData(LOGIN_STATUS)
+const defaultState = loadData(LOGIN_STATUS) || false
 /**
  * state树
  * loginStatus:true Boolean

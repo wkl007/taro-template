@@ -16,9 +16,13 @@ export default function onAction (state = defaultState, action) {
   const { type, data } = action
   switch (type) {
     case Types.SET_USER_INFO:
-      return {
-        ...state,
-        ...data
+      if (data) {
+        return {
+          ...state,
+          ...data
+        }
+      } else {
+        return data
       }
     default:
       return state

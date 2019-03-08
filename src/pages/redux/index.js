@@ -3,6 +3,7 @@ import { View, Button, Text } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { AtButton } from 'taro-ui'
 import actions from '../../redux/actions'
+import { taroGetSystemInfo, taroLogin } from '../../utils/taroUtils'
 
 @connect(({ loginStatus, accessToken, userInfo, isIpx }) => ({
   loginStatus,
@@ -22,7 +23,6 @@ class Index extends Component {
   }
 
   componentDidMount () {
-    console.log(this.props)
   }
 
   changeToken = () => {
