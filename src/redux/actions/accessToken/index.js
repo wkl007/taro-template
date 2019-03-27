@@ -1,5 +1,5 @@
 import Types from '../../constants'
-import { saveData, ACCESS_TOKEN } from '../../../utils/catche'
+import { saveData, ACCESS_TOKEN } from '../../../utils/cache'
 
 export function setAccessToken (data) {
   return dispatch => {

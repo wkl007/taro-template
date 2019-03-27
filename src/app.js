@@ -1,10 +1,10 @@
 import '@tarojs/async-await'
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
-import Index from './pages/index'
 import configStore from './redux/store'
-import { loadData, saveData, IS_IPHONEX, LOGIN_STATUS } from './utils/catche'
+import { loadData, saveData, IS_IPHONEX, LOGIN_STATUS } from './utils/cache'
 import { taroGetSystemInfo } from './utils/taroUtils'
+import Index from './pages/index'
 
 import './app.scss'
 
@@ -21,7 +21,6 @@ class App extends Component {
   config = {
     pages: [
       'pages/index/index',
-      'pages/details/index',
       'pages/redux/index',
     ],
     window: {
@@ -29,20 +28,10 @@ class App extends Component {
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
-    },
-    'plugins': {
-      'wxparserPlugin': {
-        'version': '0.2.1',
-        'provider': 'wx9d4d4ffa781ff3ac'
-      }
-    },
-    usingComponents: {
-      'wxparser': 'plugin://wxparserPlugin/wxparser',
     }
   }
 
   componentDidMount () {
-    console.log(this.$router.params)
     // this.checkLoginStatus()
     this.isIphoneX()
   }

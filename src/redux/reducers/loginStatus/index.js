@@ -1,5 +1,5 @@
 import Types from '../../constants'
-import { loadData, LOGIN_STATUS } from '../../../utils/catche'
+import { loadData, LOGIN_STATUS } from '../../../utils/cache'
 
 const defaultState = loadData(LOGIN_STATUS) || false
 /**

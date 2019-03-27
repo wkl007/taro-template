@@ -1,5 +1,5 @@
 import Types from '../../constants'
-import { loadData, IS_IPHONEX } from '../../../utils/catche'
+import { loadData, IS_IPHONEX } from '../../../utils/cache'
 
 const defaultState = loadData(IS_IPHONEX) || false
 /**

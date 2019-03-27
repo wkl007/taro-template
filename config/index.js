@@ -6,9 +6,9 @@ function resolve (dir) {
 
 const config = {
   // 项目名称
-  projectName: 'taro-weapp',
+  projectName: 'taro-template',
   // 项目创建日期
-  date: '2019-2-26',
+  date: '2019-3-13',
   // 设计稿尺寸
   designWidth: 750,
   deviceRatio: {
@@ -40,6 +40,11 @@ const config = {
       enable: true,
       config: {
         // 配置项同 https://github.com/mishoo/UglifyJS2#minify-options
+        compress: {
+          warnings: false,
+          drop_debugger: true,
+          drop_console: true,
+        },
       }
     },
     //压缩css
@@ -98,7 +103,6 @@ const config = {
       }
     }
   },
-  // H5 端专用配置
   h5: {
     publicPath: '/',
     staticDirectory: 'static',
@@ -122,8 +126,7 @@ const config = {
           }
         }
       }
-    },
-    esnextModules: ['taro-ui']
+    }
   }
 }
 
