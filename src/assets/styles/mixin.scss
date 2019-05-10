@@ -1,0 +1,17 @@
+//单行文本溢出显示省略号...
+@mixin text-overflow-hidden {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: -webkit-baseline-middle;
+}
+
+//多行换行
+@mixin more-line-nowrap($num) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $num;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}

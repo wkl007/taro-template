@@ -9,7 +9,6 @@ class Header extends Component {
   render () {
     return (
       <View className='header'>
-        <Text>头部组件</Text>
         <AtAvatar image='https://jdc.jd.com/img/200'/>
         <AtAvatar text='凹凸实验室'/>
         <AtAvatar circle image='https://jdc.jd.com/img/200'/>

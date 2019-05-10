@@ -1,0 +1,21 @@
+@import "../../assets/styles/variable";
+
+.no-data {
+  margin: 0 auto;
+  text-align: center;
+
+  .empty-img {
+    width: 500px;
+  }
+
+  .text {
+    display: block;
+  }
+
+  &.fixed {
+    position: fixed;
+    left: 50%;
+    top: 40%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+}

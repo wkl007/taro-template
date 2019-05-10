@@ -1,0 +1,41 @@
+@import "./variable";
+
+page {
+  font-size: $font-size-normal;
+  color: $color-text;
+  background: $color-background;
+}
+
+/*万能清除浮动法*/
+.clear {
+  zoom: 1;
+}
+
+.clear:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.view-fix-iphoneX {
+  bottom: 60px !important;
+}
+
+.view-fix-iphoneX:after {
+  content: ' ';
+  position: fixed;
+  bottom: 0 !important;
+  height: 60px !important;
+  width: 100%;
+  background: #fff;
+}
+
+.at-input__title {
+  font-size: $font-size-title;
+}
+
+.at-input {
+  input {
+    font-size: $font-size-title;
+  }
+}

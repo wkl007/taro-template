@@ -59,7 +59,11 @@ const config = {
   defineConstants: {},
   // 目录别名设置
   alias: {
-    '@/components': resolve('src/components')
+    '@/api': resolve('src/api'),
+    '@/assets': resolve('src/assets'),
+    '@/components': resolve('src/components'),
+    '@/redux': resolve('src/redux'),
+    '@/utils': resolve('src/utils'),
   },
   // 文件 copy 配置
   copy: {
