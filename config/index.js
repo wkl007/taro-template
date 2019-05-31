@@ -39,9 +39,9 @@ const config = {
     uglify: {
       enable: true,
       config: {
+        warnings: false,
         // 配置项同 https://github.com/mishoo/UglifyJS2#minify-options
         compress: {
-          warnings: false,
           drop_debugger: true,
           drop_console: true,
         },

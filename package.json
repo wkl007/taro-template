@@ -20,8 +20,20 @@
     "test": "taro build --type weapp",
     "build": "taro build --type weapp"
   },
-  "author": "",
+  "author": "wkl",
   "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "dependencies": {
     "@tarojs/async-await": "1.2.26",
     "@tarojs/components": "1.2.26",
@@ -45,6 +57,8 @@
     "taro-ui": "^2.1.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^7.6.1",
+    "@commitlint/config-conventional": "^7.6.0",
     "@tarojs/plugin-babel": "1.2.26",
     "@tarojs/plugin-csso": "1.2.26",
     "@tarojs/plugin-less": "1.2.26",
@@ -63,6 +77,8 @@
     "eslint-config-taro": "1.2.26",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-react": "^7.8.2",
-    "eslint-plugin-taro": "1.2.26"
+    "eslint-plugin-taro": "1.2.26",
+    "husky": "^2.3.0",
+    "lint-staged": "^8.1.7"
   }
 }
