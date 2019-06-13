@@ -8,7 +8,7 @@ const config = {
   // 项目名称
   projectName: 'taro-template',
   // 项目创建日期
-  date: '2019-3-13',
+  date: '2019-6-13',
   // 设计稿尺寸
   designWidth: 750,
   deviceRatio: {
