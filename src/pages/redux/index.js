@@ -21,10 +21,6 @@ class Index extends Component {
     navigationBarTitleText: 'redux测试'
   }
 
-  componentDidMount () {
-    console.log(this.props)
-  }
-
   changeToken = () => {
     const { setAccessToken } = this.props
     setAccessToken(Math.random())
