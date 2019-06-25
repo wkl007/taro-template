@@ -5,6 +5,10 @@ import { Text } from '@tarojs/components'
 import './index.scss'
 
 class UIcon extends Component {
+  static options = {
+    addGlobalClass: true
+  }
+
   static propTypes = {
     icon: PropTypes.string,
     prefixClass: PropTypes.string,
@@ -13,6 +17,7 @@ class UIcon extends Component {
     customStyle: PropTypes.object,
     onClick: PropTypes.func,
   }
+
   static defaultProps = {
     icon: '',
     prefixClass: 'iconfont',
