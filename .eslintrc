@@ -3,6 +3,9 @@
     "taro"
   ],
   "rules": {
+    "import/no-commonjs": 0,
+    "import/prefer-default-export": 0,
+    "no-undef": 0,
     "no-unused-vars": [
       0,
       {
@@ -30,7 +33,9 @@
         "beforeSelfClosing": "allow",
         "afterOpening": "never"
       }
-    ]
+    ],
+    "react/no-direct-mutation-state": 0,
+    "react/no-unused-state": 0
   },
   "parser": "babel-eslint"
 }
