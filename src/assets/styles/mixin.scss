@@ -8,10 +8,10 @@
 
 //多行换行
 @mixin more-line-nowrap($num) {
-  overflow: hidden;
   display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: $num;
+  overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $num;
 }

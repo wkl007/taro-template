@@ -1,33 +1,33 @@
 @import "./variable";
 
 page {
-  font-size: $font-size-normal;
   color: $color-text;
+  font-size: $font-size-normal;
   background: $color-background;
 }
 
-/*万能清除浮动法*/
+/* 万能清除浮动法 */
 .clear {
   zoom: 1;
 }
 
-.clear:after {
-  content: "";
-  clear: both;
+.clear::after {
   display: block;
+  clear: both;
+  content: "";
 }
 
 .view-fix-iphoneX {
   bottom: 60px !important;
 }
 
-.view-fix-iphoneX:after {
-  content: ' ';
+.view-fix-iphoneX::after {
   position: fixed;
   bottom: 0 !important;
-  height: 60px !important;
   width: 100%;
+  height: 60px !important;
   background: #fff;
+  content: ' ';
 }
 
 .at-input__title {

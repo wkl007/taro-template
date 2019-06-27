@@ -4,8 +4,8 @@
   overflow: hidden;
 
   .rich-text {
-    line-height: 50px;
-    font-size: $font-size-normal;
     color: $color-text;
+    font-size: $font-size-normal;
+    line-height: 50px;
   }
 }
