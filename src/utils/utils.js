@@ -1,4 +1,5 @@
-const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/
+import dayjs from 'dayjs'
+import numeral from 'numeral'
 
 /**
  * 判断url
@@ -6,6 +7,7 @@ const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(
  * @returns {boolean}
  */
 export function isUrl (path) {
+  const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/
   return reg.test(path)
 }
 
@@ -56,8 +58,8 @@ export function bubble_sort (arr, fn) {
   let len = arr.length
   while (len--) {
     for (let i = 0;
-         i < len;
-         i++
+      i < len;
+      i++
     ) {
       if (fn(arr[i], arr[i + 1]) > 0) {
         [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]
@@ -65,4 +67,26 @@ export function bubble_sort (arr, fn) {
     }
   }
   return arr
+}
+
+/**
+ * 格式化时间
+ * @param date
+ * @param format
+ * @returns {string}
+ */
+export function dateFormat (date, format = 'YYYY-MM-DD HH:mm:ss') {
+  if (!date) return
+  return dayjs(date).format(format)
+}
+
+/**
+ * 格式化数字
+ * @param number
+ * @param format
+ * @returns {*}
+ */
+export function numberFormat (number, format = '0,00.00') {
+  if (!number) return
+  return numeral(number).format(format)
 }
