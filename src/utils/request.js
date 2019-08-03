@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro'
-import configStore from '../redux/store'
-import actions from '../redux/actions'
+import configStore from '@/redux/store'
+import actions from '@/redux/actions'
 import { loadData, ACCESS_TOKEN } from './cache'
 
 import { isUrl } from './utils'
@@ -63,7 +63,7 @@ export default function request (options) {
         store.dispatch(actions.setLoginStatus(false))
         store.dispatch(actions.setUserInfo(''))
         store.dispatch(actions.setAccessToken(''))
-        //跳转到首页
+        // 跳转到首页
         Taro.reLaunch({
           url: '/pages/index/index'
         })

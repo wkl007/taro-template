@@ -1,5 +1,5 @@
-import Types from '../../constants'
-import { saveData, IS_IPHONEX } from '../../../utils/cache'
+import Types from '@/redux/constants'
+import { IS_IPHONEX, saveData } from '@/utils/cache'
 
 export function setIsIpx (data) {
   return dispatch => {

@@ -1,10 +1,10 @@
 import '@tarojs/async-await'
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
-import configStore from './redux/store'
-import { loadData, saveData, IS_IPHONEX, LOGIN_STATUS } from './utils/cache'
-import { taroGetSystemInfo } from './utils/taroUtils'
-import Index from './pages/index'
+import configStore from '@/redux/store'
+import { loadData, saveData, IS_IPHONEX, LOGIN_STATUS } from '@/utils/cache'
+import { taroGetSystemInfo } from '@/utils/taroUtils'
+import Index from '@/pages/index'
 
 import './app.scss'
 

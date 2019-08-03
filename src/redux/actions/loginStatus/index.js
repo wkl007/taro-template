@@ -1,5 +1,5 @@
-import Types from '../../constants'
-import { saveData, LOGIN_STATUS } from '../../../utils/cache'
+import Types from '@/redux/constants'
+import { saveData, LOGIN_STATUS } from '@/utils/cache'
 
 export function setLoginStatus (data) {
   return dispatch => {

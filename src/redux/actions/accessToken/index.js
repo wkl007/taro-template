@@ -1,5 +1,5 @@
-import Types from '../../constants'
-import { saveData, ACCESS_TOKEN } from '../../../utils/cache'
+import Types from '@/redux/constants'
+import { saveData, ACCESS_TOKEN } from '@/utils/cache'
 
 export function setAccessToken (data) {
   return dispatch => {

@@ -35,7 +35,7 @@ const config = {
         'transform-object-rest-spread'
       ]
     },
-    //压缩js
+    // 压缩js
     uglify: {
       enable: true,
       config: {
@@ -47,7 +47,7 @@ const config = {
         },
       }
     },
-    //压缩css
+    // 压缩css
     csso: {
       enable: true,
       config: {
@@ -59,11 +59,7 @@ const config = {
   defineConstants: {},
   // 目录别名设置
   alias: {
-    '@/api': resolve('src/api'),
-    '@/assets': resolve('src/assets'),
-    '@/components': resolve('src/components'),
-    '@/redux': resolve('src/redux'),
-    '@/utils': resolve('src/utils'),
+    '@': resolve('src'),
   },
   // 文件 copy 配置
   copy: {
@@ -73,7 +69,7 @@ const config = {
   // 小程序端专用配置
   weapp: {
     compile: {
-      compressTemplate: true,//打包时是否需要压缩 wxml
+      compressTemplate: true,// 打包时是否需要压缩 wxml
     },
     module: {
       postcss: {

@@ -2,7 +2,7 @@ import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { connect } from '@tarojs/redux'
 import { AtButton } from 'taro-ui'
-import actions from '../../redux/actions'
+import actions from '@/redux/actions'
 
 @connect(({ loginStatus, accessToken, userInfo, isIpx }) => ({
   loginStatus,

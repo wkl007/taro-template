@@ -1,12 +1,12 @@
 import Taro from '@tarojs/taro'
 
-export const LOGIN_STATUS = 'LOGIN_STATUS' //当前用户登录状态
+export const LOGIN_STATUS = 'LOGIN_STATUS' // 当前用户登录状态
 
-export const USER_INFO = 'User_Info' //用户信息
+export const USER_INFO = 'User_Info' // 用户信息
 
-export const ACCESS_TOKEN = 'Access_Token' //token
+export const ACCESS_TOKEN = 'Access_Token' // token
 
-export const IS_IPHONEX = 'Is_IphoneX' //当前设备是否是iphoneX
+export const IS_IPHONEX = 'Is_IphoneX' // 当前设备是否是iphoneX
 
 export const setStorage = (key, data) => {
   Taro.setStorageSync(key, data)

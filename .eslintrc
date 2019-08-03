@@ -35,7 +35,9 @@
       }
     ],
     "react/no-direct-mutation-state": 0,
-    "react/no-unused-state": 0
+    "react/no-unused-state": 0,
+    "react/sort-comp": 0,
+    "spaced-comment": 2
   },
   "parser": "babel-eslint"
 }
