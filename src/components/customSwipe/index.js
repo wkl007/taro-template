@@ -4,23 +4,23 @@ import { View, Swiper, SwiperItem, Image } from '@tarojs/components'
 
 import './index.scss'
 
-class CustomSwiper extends Component {
+class CustomSwipe extends Component {
 
   static propTypes = {
-    swiperList: PropTypes.array,
+    swipeList: PropTypes.array,
     onHandleClick: PropTypes.func
   }
   static defaultProps = {
-    swiperList: [],
+    swipeList: [],
     onHandleClick: () => {}
   }
 
   render () {
-    const { swiperList, onHandleClick } = this.props
+    const { swipeList, onHandleClick } = this.props
     return (
-      <View className='custom-swiper'>
+      <View className='custom-swipe'>
         {
-          swiperList.length && <Swiper
+          swipeList.length && <Swiper
             interval={5000}
             duration={500}
             indicatorColor='#999'
@@ -29,12 +29,12 @@ class CustomSwiper extends Component {
             indicatorDots
             circular
           >
-            {swiperList.map((item, index) => (
+            {swipeList.map((item, index) => (
               <SwiperItem
                 key={index}
                 onClick={() => onHandleClick(item)}
               >
-                <Image src={item.imageUrl} className='swiper-img'/>
+                <Image src={item.imageUrl} className='swipe-img'/>
               </SwiperItem>
             ))}
           </Swiper>
@@ -44,4 +44,4 @@ class CustomSwiper extends Component {
   }
 }
 
-export default CustomSwiper
+export default CustomSwipe

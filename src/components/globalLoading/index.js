@@ -1,7 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import PropTypes from 'prop-types'
 import { AtActivityIndicator } from 'taro-ui'
-
 import { View, Text } from '@tarojs/components'
 
 import './index.scss'
@@ -12,6 +11,7 @@ class GlobalLoading extends Component {
     text: PropTypes.string,
     loading: PropTypes.bool,
   }
+
   static defaultProps = {
     text: '努力加载中...',
     loading: false

@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
 import configStore from '@/redux/store'
 import actions from '@/redux/actions'
-import { loadData, ACCESS_TOKEN } from './cache'
+import { loadData, ACCESS_TOKEN } from '@/utils/cache'
 
 import { isUrl } from './utils'
 

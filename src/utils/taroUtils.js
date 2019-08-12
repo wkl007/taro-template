@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import configStore from '@/redux/store'
 import actions from '@/redux/actions'
 import { login } from '@/api'
-import { loadData, LOGIN_STATUS } from './cache'
+import { loadData, LOGIN_STATUS } from '@/utils/cache'
 
 const store = configStore()
 

@@ -12,6 +12,7 @@ class HtmlParse extends Component {
     url: PropTypes.string,
     onHtmlLoad: PropTypes.func,
   }
+
   static defaultProps = {
     url: '',
     onHtmlLoad: () => {}

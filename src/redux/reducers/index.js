@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import loginStatus from './loginStatus'
-import accessToken from './accessToken'
-import userInfo from './userInfo'
-import isIpx from './isIpx'
+import loginStatus from '@/redux/reducers/loginStatus'
+import accessToken from '@/redux/reducers/accessToken'
+import userInfo from '@/redux/reducers/userInfo'
+import isIpx from '@/redux/reducers/isIpx'
 
 // 合并reducer
 export default combineReducers({
