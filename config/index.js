@@ -8,7 +8,7 @@ const config = {
   // 项目名称
   projectName: 'taro-template',
   // 项目创建日期
-  date: '2019-6-13',
+  date: '2019-8-19',
   // 设计稿尺寸
   designWidth: 750,
   deviceRatio: {
@@ -61,7 +61,6 @@ const config = {
   alias: {
     '@': resolve('src'),
   },
-  // 文件 copy 配置
   copy: {
     patterns: [],
     options: {}

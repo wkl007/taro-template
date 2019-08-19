@@ -13,8 +13,6 @@
       }
     ],
     "no-shadow": 0,
-    //外部作用域中的变量不能与它所包含的作用域中的变量或参数同名
-    // 限制文件后缀
     "react/jsx-filename-extension": [
       1,
       {
@@ -39,5 +37,12 @@
     "react/sort-comp": 0,
     "spaced-comment": 2
   },
-  "parser": "babel-eslint"
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "useJSXTextNode": true,
+    "project": "./tsconfig.json"
+  }
 }
