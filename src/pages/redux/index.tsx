@@ -1,3 +1,4 @@
+import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { Text, View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
@@ -11,15 +12,29 @@ interface ReduxProps {
   accessToken: string;
   userInfo: any;
   isIpx: boolean;
-  setLoginStatus: Function;
-  setAccessToken: Function;
-  setUserInfo: Function;
-  setIsIpx: Function;
+  setLoginStatus: any;
+  setAccessToken: any;
+  setUserInfo: any;
+  setIsIpx: any;
 }
+
+interface ReduxOwnProps {}
 
 interface ReduxState {}
 
-class ReduxPage extends Component<ReduxProps, ReduxState> {
+interface ReduxPage {
+  props: ReduxProps
+}
+
+@connect(({ loginStatus, accessToken, userInfo, isIpx }) => ({ loginStatus, accessToken, userInfo, isIpx }),
+  dispatch => ({
+    setLoginStatus: (data: boolean) => dispatch(actions.setLoginStatus(data)),
+    setAccessToken: (data: string) => dispatch(actions.setAccessToken(data)),
+    setUserInfo: (data: any) => dispatch(actions.setUserInfo(data)),
+    setIsIpx: (data: boolean) => dispatch(actions.setIsIpx(data)),
+  })
+)
+class ReduxPage extends Component {
   config: Config = {
     navigationBarTitleText: 'redux'
   }
@@ -57,19 +72,4 @@ class ReduxPage extends Component<ReduxProps, ReduxState> {
   }
 }
 
-const mapStateToProps = (state: ReduxProps) => ({
-  userInfo: state.userInfo,
-  accessToken: state.accessToken,
-  isIpx: state.isIpx,
-  loginStatus: state.loginStatus
-})
-
-const mapDispatchToProps = (dispatch: any) => ({
-  setLoginStatus: (data: boolean) => dispatch(actions.setLoginStatus(data)),
-  setAccessToken: (data: string) => dispatch(actions.setAccessToken(data)),
-  setUserInfo: (data: any) => dispatch(actions.setUserInfo(data)),
-  setIsIpx: (data: boolean) => dispatch(actions.setIsIpx(data)),
-})
-
-// @ts-ignore
-export default connect(mapStateToProps, mapDispatchToProps)(ReduxPage)
+export default ReduxPage as ComponentClass<ReduxOwnProps, ReduxState>

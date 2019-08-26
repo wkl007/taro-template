@@ -7,10 +7,12 @@ import HtmlParse from '@/components/HtmlParse'
 import GlobalLoading from '@/components/GlobalLoading'
 import NoData from '@/components/NoData'
 import UIcon from '@/components/UIcon'
+import withShare from '@/utils/withShare'
 import { getBannerList } from '@/api'
 
 import './index.scss'
 
+@withShare({})
 class Index extends Component {
 
   /**
