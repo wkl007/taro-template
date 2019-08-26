@@ -1,6 +1,6 @@
 # taro-template
 
-> taro init template
+> taro 初始化模板。该项目有TypeScript与JavaScript两个版本，切换分支可查看不同版本。
 
 ## Build Setup
 
