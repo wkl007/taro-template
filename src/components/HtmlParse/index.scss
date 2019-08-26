@@ -1,0 +1,11 @@
+@import "../../assets/styles/variable";
+
+.html-parse {
+  overflow: hidden;
+
+  .rich-text {
+    color: $color-text;
+    font-size: $font-size-normal;
+    line-height: 50px;
+  }
+}
