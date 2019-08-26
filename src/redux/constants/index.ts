@@ -1,5 +1,5 @@
 interface TypesInterface {
-  [key: string]: string;
+  [key: string]: string
 }
 
 const Types: TypesInterface = {

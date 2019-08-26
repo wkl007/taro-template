@@ -4,11 +4,11 @@ import classNames from 'classnames'
 import './index.scss'
 
 interface NoDataProps {
-  emptyImg: string;
-  text?: string;
-  top?: number;
-  bottom?: number;
-  fixed?: boolean;
+  emptyImg: string
+  text?: string
+  top?: number
+  bottom?: number
+  fixed?: boolean
 }
 
 const NoData: FC<NoDataProps> = ({ emptyImg = '', text = '暂无数据', top = 50, bottom = 50, fixed = false }) => {
