@@ -5,14 +5,14 @@ import { isUrl } from '@/utils/utils'
 import { loadData, ACCESS_TOKEN } from '@/utils/cache'
 
 interface CodeMessageType {
-  [key: number]: string
+  [key: number]: string;
 }
 
 interface Options {
-  url: string
-  method: 'OPTIONS' | 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT'
-  data?: any
-  header?: any
+  url: string;
+  method: 'OPTIONS' | 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT';
+  data?: any;
+  header?: any;
 }
 
 const store = configStore()

@@ -17,12 +17,12 @@ function parseHtmlContent (html: string): string {
 }
 
 interface HtmlParseProps {
-  url: string
-  onHtmlLoad?: () => void
+  url: string;
+  onHtmlLoad?: () => void;
 }
 
 interface HtmlParseState {
-  content: string
+  content: string;
 }
 
 class HtmlParse extends Component<HtmlParseProps, HtmlParseState> {

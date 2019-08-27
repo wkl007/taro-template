@@ -3,12 +3,12 @@ import { Text } from '@tarojs/components'
 import './index.scss'
 
 interface UIconProps {
-  icon: string
-  prefixClass?: string
-  color?: string
-  size?: number
-  customStyle?: any
-  onClick?: () => void
+  icon: string;
+  prefixClass?: string;
+  color?: string;
+  size?: number;
+  customStyle?: any;
+  onClick?: () => void;
 }
 
 const UIcon: FC<UIconProps> = ({ icon = '', prefixClass = 'iconfont', color = '#373737', size = 26, customStyle = {}, onClick }) => {

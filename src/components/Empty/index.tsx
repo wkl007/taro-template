@@ -3,7 +3,7 @@ import { View } from '@tarojs/components'
 import './index.scss'
 
 interface EmptyProps {
-  height?: number
+  height?: number;
 }
 
 const Empty: FC<EmptyProps> = ({ height = 16 }) => (

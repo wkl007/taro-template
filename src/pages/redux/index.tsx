@@ -8,14 +8,14 @@ import actions from '@/redux/actions'
 import './index.scss'
 
 interface ReduxProps {
-  loginStatus: boolean
-  accessToken: string
-  userInfo: any
-  isIpx: boolean
-  setLoginStatus: any
-  setAccessToken: any
-  setUserInfo: any
-  setIsIpx: any
+  loginStatus: boolean;
+  accessToken: string;
+  userInfo: any;
+  isIpx: boolean;
+  setLoginStatus: any;
+  setAccessToken: any;
+  setUserInfo: any;
+  setIsIpx: any;
 }
 
 interface ReduxOwnProps {}
@@ -23,7 +23,7 @@ interface ReduxOwnProps {}
 interface ReduxState {}
 
 interface ReduxPage {
-  props: ReduxProps
+  props: ReduxProps;
 }
 
 @connect(({ loginStatus, accessToken, userInfo, isIpx }) => ({ loginStatus, accessToken, userInfo, isIpx }),
