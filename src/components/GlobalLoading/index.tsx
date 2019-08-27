@@ -4,7 +4,7 @@ import { AtActivityIndicator } from 'taro-ui'
 import './index.scss'
 
 interface GlobalLoadingProps {
-  text?: string;
+  text?: string
   loading: boolean
 }
 

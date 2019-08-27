@@ -3,8 +3,8 @@ import { View, Swiper, SwiperItem, Image } from '@tarojs/components'
 import './index.scss'
 
 interface CustomSwipeProps {
-  swipeList?: Array<{ imageUrl: string; }>;
-  onClick: (item: any) => void;
+  swipeList?: Array<{ imageUrl: string; }>
+  onClick: (item: any) => void
 }
 
 const CustomSwipe: FC<CustomSwipeProps> = ({ swipeList = [], onClick }) => (
