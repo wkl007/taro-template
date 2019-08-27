@@ -62,7 +62,9 @@ const config = {
     '@': resolve('src'),
   },
   copy: {
-    patterns: [],
+    patterns: [
+      { from: 'src/components/ParserRichText/Parser/', to: 'dist/components/ParserRichText/Parser/' }
+    ],
     options: {}
   },
   // 小程序端专用配置

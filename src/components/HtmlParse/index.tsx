@@ -1,5 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
-import { RichText, View } from '@tarojs/components'
+import { View } from '@tarojs/components'
+import ParserRichText from '@/components/ParserRichText'
 import { isUrl } from '@/utils/utils'
 import CommonServer from '@/api/common'
 import './index.scss'
@@ -48,7 +49,10 @@ class HtmlParse extends Component<HtmlParseProps, HtmlParseState> {
     const { content } = this.state
     return (
       <View className='html-parse'>
-        <RichText className='rich-text' nodes={content}/>
+        <ParserRichText
+          html={content}
+          selectable
+        />
       </View>
     )
   }
