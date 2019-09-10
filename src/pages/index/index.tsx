@@ -32,9 +32,9 @@ class Index extends Component {
     }).catch(() => {})
   }
 
-  goRedux = () => {
+  goPage = (page: string) => {
     Taro.navigateTo({
-      url: `/pages/redux/index`
+      url: `/pages/${page}/index`
     })
   }
 
@@ -46,8 +46,12 @@ class Index extends Component {
         />
         <Header/>
         <UIcon size={100} color='red' icon='icon-chongzhi'/>
-        <AtButton type='primary' onClick={this.goRedux}>
+        <AtButton type='primary' onClick={() => this.goPage('redux')}>
           redux测试
+        </AtButton>
+        <Empty/>
+        <AtButton type='primary' onClick={() => this.goPage('navigation')}>
+          自定义导航
         </AtButton>
         <Empty/>
         <NoData emptyImg='http://puui.qpic.cn/vcover_vt_pic/0/gozy3av1tsva9swt1469187012.jpg/0'/>

@@ -27,7 +27,8 @@ class App extends Component {
   config: Config = {
     pages: [
       'pages/index/index',
-      'pages/redux/index'
+      'pages/redux/index',
+      'pages/navigation/index',
     ],
     window: {
       backgroundTextStyle: 'light',
