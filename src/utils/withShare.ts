@@ -12,7 +12,6 @@ function withShare (opts: { title?: string; imageUrl?: string, path?: string } =
     class WithShare extends Component {
       componentDidMount () {
         if (super.componentDidMount) {
-          console.log(222)
           super.componentDidMount()
         }
       }
