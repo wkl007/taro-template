@@ -11,11 +11,9 @@ interface ReduxProps {
   loginStatus: boolean;
   accessToken: string;
   userInfo: any;
-  isIpx: boolean;
   setLoginStatus: any;
   setAccessToken: any;
   setUserInfo: any;
-  setIsIpx: any;
 }
 
 interface ReduxOwnProps {}
@@ -26,12 +24,11 @@ interface ReduxPage {
   props: ReduxProps;
 }
 
-@connect(({ loginStatus, accessToken, userInfo, isIpx }) => ({ loginStatus, accessToken, userInfo, isIpx }),
+@connect(({ loginStatus, accessToken, userInfo }) => ({ loginStatus, accessToken, userInfo }),
   dispatch => ({
     setLoginStatus: (data: boolean) => dispatch(actions.setLoginStatus(data)),
     setAccessToken: (data: string) => dispatch(actions.setAccessToken(data)),
     setUserInfo: (data: any) => dispatch(actions.setUserInfo(data)),
-    setIsIpx: (data: boolean) => dispatch(actions.setIsIpx(data)),
   })
 )
 class ReduxPage extends Component {
@@ -58,7 +55,7 @@ class ReduxPage extends Component {
   }
 
   render () {
-    const { loginStatus, accessToken, userInfo, isIpx } = this.props
+    const { loginStatus, accessToken, userInfo } = this.props
     return (
       <View className='redux'>
         <Text>{loginStatus ? '已登录' : '未登录'}</Text>
@@ -67,7 +64,7 @@ class ReduxPage extends Component {
         <AtButton onClick={this.changeToken}>修改token</AtButton>
         <Text>{userInfo.name}</Text>
         <AtButton onClick={this.changeUserInfo}>修改用户信息</AtButton>
-        <Text>{isIpx ? '是iPhoneX' : '不是iPhoneX'}</Text> </View>
+      </View>
     )
   }
 }

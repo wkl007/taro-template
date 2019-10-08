@@ -6,8 +6,6 @@ export const USER_INFO: string = 'User_Info' // 用户信息
 
 export const ACCESS_TOKEN: string = 'Access_Token' // token
 
-export const IS_IPHONEX: string = 'Is_IphoneX' // 当前设备是否是iphoneX
-
 export function setStorageSync (key: string, data: string | any): void {
   Taro.setStorageSync(key, data)
 }
