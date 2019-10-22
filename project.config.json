@@ -2,7 +2,7 @@
 	"miniprogramRoot": "dist/",
 	"projectname": "taro-template",
 	"description": "taro小程序模板",
-	"appid": "wxa4b0ec5e773910fc",
+	"appid": "wx63639320e9874ee1",
 	"setting": {
 		"urlCheck": false,
 		"es6": false,
@@ -26,7 +26,7 @@
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
-	"libVersion": "2.8.3",
+	"libVersion": "2.9.0",
 	"condition": {
 		"search": {
 			"current": -1,

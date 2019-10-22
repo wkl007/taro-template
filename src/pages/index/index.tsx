@@ -58,6 +58,12 @@ class Index extends Component {
         <HtmlParse
           url='https://shancai-1257275967.coscd.myqcloud.com/shancai/images/20190731/center2019073111173646.html'
         />
+        <View className='safe-area-no-inset-bottom right'>
+          侧边固定区域
+        </View>
+        <View className='safe-area-inset-bottom bottom'>
+          底部固定区域
+        </View>
       </View>
     )
   }
