@@ -21,12 +21,13 @@
 			"disablePlugins": [],
 			"outputPath": ""
 		},
-		"bundle": true
+		"bundle": true,
+		"showShadowRootInWxmlPanel": false
 	},
 	"compileType": "miniprogram",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
-	"libVersion": "2.9.0",
+	"libVersion": "2.9.3",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -54,6 +55,13 @@
 					"id": -1,
 					"name": "自定义导航",
 					"pathName": "pages/navigation/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "手写板",
+					"pathName": "pages/write/index",
 					"scene": null
 				}
 			]

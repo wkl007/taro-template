@@ -54,6 +54,10 @@ class Index extends Component {
           自定义导航
         </AtButton>
         <Empty/>
+        <AtButton type='primary' onClick={() => this.goPage('write')}>
+          手写板
+        </AtButton>
+        <Empty/>
         <NoData emptyImg='http://puui.qpic.cn/vcover_vt_pic/0/gozy3av1tsva9swt1469187012.jpg/0'/>
         <HtmlParse
           url='https://shancai-1257275967.coscd.myqcloud.com/shancai/images/20190731/center2019073111173646.html'

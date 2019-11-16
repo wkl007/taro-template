@@ -1,0 +1,106 @@
+.write {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+  height: 95vh;
+  margin: 30px 0;
+  overflow: hidden;
+  font-size: 28px;
+  background: #fbfbfb;
+
+  .handWriting {
+    width: 100%;
+    height: 95vh;
+    background: #fff;
+  }
+
+  .handRight {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .handCenter {
+    flex: 5;
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 4px dashed #e9e9e9;
+  }
+
+  .handTitle {
+    flex: 1;
+    color: #666;
+    transform: rotate(90deg);
+  }
+
+  .handBtn button {
+    font-size: 28px;
+  }
+
+  .handBtn {
+    display: inline-flex;
+    flex: 1;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    height: 95vh;
+  }
+
+  .delBtn {
+    position: absolute;
+    top: 250px;
+    left: 0;
+    color: #666;
+    transform: rotate(90deg);
+  }
+
+  .delBtn image {
+    position: absolute;
+    top: 13px;
+    left: 25px;
+  }
+
+  .subBtn {
+    position: absolute;
+    bottom: 52px;
+    left: -3px;
+    display: inline-flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    color: #fff;
+    text-align: center;
+    background: #008ef6;
+    transform: rotate(90deg);
+  }
+
+  .black-select {
+    position: absolute;
+    top: 30px;
+    left: 25px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .black-select.color_select {
+    top: 30px;
+    left: 10px;
+    width: 90px;
+    height: 90px;
+  }
+
+  .red-select {
+    position: absolute;
+    top: 140px;
+    left: 25px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .red-select.color_select {
+    top: 120px;
+    left: 10px;
+    width: 90px;
+    height: 90px;
+  }
+}

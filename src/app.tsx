@@ -29,6 +29,7 @@ class App extends Component {
       'pages/index/index',
       'pages/redux/index',
       'pages/navigation/index',
+      'pages/write/index',
     ],
     window: {
       backgroundTextStyle: 'light',
