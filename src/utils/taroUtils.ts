@@ -59,7 +59,7 @@ export function taroLogin (): Promise<any> {
  * 支付
  * @param data
  */
-export function taroPay (data: { timeStamp: string; nonceStr: string; signType: string; paySign: string; package: string }): Promise<any> {
+export function taroPay (data: { timeStamp: string; nonceStr: string; signType?: keyof Taro.requestPayment.signType; paySign: string; package: string }): Promise<any> {
   const { timeStamp, nonceStr, signType, paySign } = data
   return new Promise((resolve, reject) => {
     Taro.requestPayment({

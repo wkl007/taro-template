@@ -1,3 +1,322 @@
-"use strict";function DomHandler(t){var e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};this.imgList=[],this.imgIndex=0,this.nodes=[],this.title="",this._videoNum=0,this._audioNum=0,this._CssHandler=new CssHandler(t,e),this._tagStack=[],this._whiteSpace=!1}var emoji;try{emoji=require("./emoji.js")}catch(t){}var CssHandler=require("./CssHandler.js"),CanIUse=require("./api.js").versionHigherThan("2.7.1"),trustTag={a:0,abbr:1,ad:0,audio:0,b:1,blockquote:1,br:0,code:1,col:0,colgroup:0,dd:1,del:1,dl:1,dt:1,div:1,em:1,fieldset:0,font:1,h1:0,h2:0,h3:0,h4:0,h5:0,h6:0,hr:0,i:1,img:1,ins:1,label:1,legend:0,li:0,ol:0,p:1,q:1,source:0,span:1,strong:1,sub:0,sup:0,table:0,tbody:0,td:0,tfoot:0,th:0,thead:0,tr:0,u:1,ul:0,video:1},blockTag={address:!0,article:!0,aside:!0,body:!0,center:!0,cite:!0,footer:!0,header:!0,html:!0,nav:!0,pre:!0,section:!0},ignoreTag={area:!0,base:!0,basefont:!0,canvas:!0,circle:!0,command:!0,ellipse:!0,embed:!0,frame:!0,head:!0,iframe:!0,input:!0,isindex:!0,keygen:!0,line:!0,link:!0,map:!0,meta:!0,param:!0,path:!0,polygon:!0,polyline:!0,rect:!0,script:!0,stop:!0,textarea:!0,title:!0,track:!0,use:!0,wbr:!0};
+const Common = 1,
+  Rich = 2;
+const trustTag = {
+  a: Rich,
+  abbr: Common,
+  audio: Rich,
+  b: Common,
+  blockquote: Common,
+  br: Rich,
+  code: Common,
+  col: Rich,
+  colgroup: Rich,
+  dd: Common,
+  del: Common,
+  dl: Common,
+  dt: Common,
+  div: Common,
+  em: Common,
+  fieldset: Rich,
+  font: Common,
+  h1: Rich,
+  h2: Rich,
+  h3: Rich,
+  h4: Rich,
+  h5: Rich,
+  h6: Rich,
+  hr: Rich,
+  i: Common,
+  img: Common,
+  ins: Common,
+  label: Common,
+  legend: Rich,
+  li: Rich,
+  ol: Rich,
+  p: Common,
+  q: Common,
+  source: Rich,
+  span: Common,
+  strong: Common,
+  sub: Rich,
+  sup: Rich,
+  table: Rich,
+  tbody: Rich,
+  td: Rich,
+  tfoot: Rich,
+  th: Rich,
+  thead: Rich,
+  tr: Rich,
+  u: Common,
+  ul: Rich,
+  video: Common
+};
+const blockTag = {
+  address: true,
+  article: true,
+  aside: true,
+  body: true,
+  center: true,
+  cite: true,
+  footer: true,
+  header: true,
+  html: true,
+  nav: true,
+  pre: true,
+  section: true
+}
+const textTag = {
+  a: true,
+  abbr: true,
+  b: true,
+  big: true,
+  code: true,
+  del: true,
+  em: true,
+  font: true,
+  i: true,
+  ins: true,
+  label: true,
+  mark: true,
+  q: true,
+  s: true,
+  small: true,
+  span: true,
+  strong: true,
+  u: true
+};
+const ignoreTag = {
+  area: true,
+  base: true,
+  basefont: true,
+  canvas: true,
+  circle: true,
+  command: true,
+  ellipse: true,
+  embed: true,
+  frame: true,
+  head: true,
+  iframe: true,
+  input: true,
+  isindex: true,
+  keygen: true,
+  line: true,
+  link: true,
+  map: true,
+  meta: true,
+  param: true,
+  path: true,
+  polygon: true,
+  polyline: true,
+  rect: true,
+  script: true,
+  stop: true,
+  textarea: true,
+  title: true,
+  track: true,
+  use: true,
+  wbr: true
+};
+if (CanIUse) {
+  trustTag.bdi = Rich;
+  trustTag.bdo = Rich;
+  trustTag.caption = Rich;
+  trustTag.rt = Rich;
+  trustTag.ruby = Rich;
+  ignoreTag.rp = true;
+  trustTag.big = Common;
+  trustTag.small = Common;
+  trustTag.pre = Rich;
+  delete blockTag.pre;
+}
+// 添加默认值
+function initStyle(tagStyle) {
+  tagStyle.a = "display:inline;color:#366092;word-break:break-all;" + (tagStyle.a || "");
+  tagStyle.address = "font-style:italic;" + (tagStyle.address || "");
+  tagStyle.blockquote = tagStyle.blockquote || 'background-color:#f6f6f6;border-left:3px solid #dbdbdb;color:#6c6c6c;padding:5px 0 5px 10px';
+  tagStyle.center = 'text-align:center;' + (tagStyle.center || "");
+  tagStyle.cite = "font-style:italic;" + (tagStyle.cite || "");
+  tagStyle.code = tagStyle.code || 'padding:0 1px 0 1px;margin-left:2px;margin-right:2px;background-color:#f8f8f8;border:1px solid #cccccc;border-radius:3px';
+  tagStyle.dd = "margin-left:40px;" + (tagStyle.dd || "");
+  tagStyle.img = "max-width:100%;" + (tagStyle.img || "");
+  tagStyle.mark = "display:inline;background-color:yellow;" + (tagStyle.mark || "");
+  tagStyle.pre = "overflow:scroll;" + (tagStyle.pre || 'background-color:#f6f8fa;padding:5px;border-radius:5px;');
+  tagStyle.s = "display:inline;text-decoration:line-through;" + (tagStyle.s || "");
+  tagStyle.u = "display:inline;text-decoration:underline;" + (tagStyle.u || "");
+  // 低版本兼容
+  if (!CanIUse) {
+    blockTag.caption = true;
+    tagStyle.big = "display:inline;font-size:1.2em;" + (tagStyle.big || "");
+    tagStyle.small = "display:inline;font-size:0.8em;" + (tagStyle.small || "");
+    tagStyle.pre = "font-family:monospace;white-space:pre;" + tagStyle.pre;
+  }
+  return tagStyle;
+}
 
-CanIUse?(trustTag.bdi=0,trustTag.bdo=0,trustTag.caption=0,trustTag.rt=0,trustTag.ruby=0,ignoreTag.rp=!0,trustTag.big=1,trustTag.small=1,trustTag.pre=0,delete blockTag.pre):blockTag.caption=!0,DomHandler.prototype._addDomElement=function(t){("pre"==t.name||t.attrs&&/white-space\s*:\s*pre/.test(t.attrs.style))&&(this._whiteSpace=!0,t.pre=!0);var e=this._tagStack[this._tagStack.length-1];(e?e.children:this.nodes).push(t)},DomHandler.prototype._bubbling=function(){for(var t=this._tagStack.length-1;t>=0;t--){if(!trustTag[this._tagStack[t].name])return this._tagStack[t].name;this._tagStack[t].continue=!0}},DomHandler.prototype.onopentag=function(t,e){var s={children:[]},a=this._CssHandler.match(t,e,s);switch(t){case"div":case"p":e.align&&(e.style+=";text-align:"+e.align,delete e.align);break;case"img":e.width&&(e.style="width:"+e.width+(/[0-9]/.test(e.width[e.width.length-1])?"px":"")+";"+e.style,delete e.width),e["data-src"]&&(e.src=e.src||e["data-src"],delete e["data-src"]),!e.hasOwnProperty("ignore")&&e.src&&(-1==this.imgList.indexOf(e.src)||/base64/.test(e.src)||(e.src=e.src+(/\?/.test(e.src)?"&":"?")+"parserid="+this.imgIndex++),this.imgList.push(e.src),"a"==this._bubbling()&&(e.ignore=""));break;case"font":if(t="span",e.color&&(e.style+=";color:"+e.color,delete e.color),e.face&&(e.style+=";font-family:"+e.face,delete e.face),e.size){var r=parseInt(e.size);r<1?r=1:r>7&&(r=7);var i=[10,13,16,18,24,32,48];e.style+=";font-size:"+i[r-1]+"px",delete e.size}break;case"a":case"ad":this._bubbling();break;case"video":case"audio":e.loop=e.hasOwnProperty("loop"),e.controls=e.hasOwnProperty("controls"),e.autoplay=e.hasOwnProperty("autoplay"),"video"==t&&(e.muted=e.hasOwnProperty("muted"),e.width&&(e.style="width:"+parseFloat(e.width)+"px;"+e.style,delete e.width),e.height&&(e.style="height:"+parseFloat(e.height)+"px;"+e.style,delete e.height)),e.id=t+ ++this["_"+t+"Num"],e.source=[],e.src&&e.source.push(e.src),e.controls||e.autoplay||console.warn("存在没有controls属性的"+t+"标签，可能导致无法播放",e),this._bubbling();break;case"source":var o=this._tagStack[this._tagStack.length-1];return!o||"video"!=o.name&&"audio"!=o.name||(o.attrs.source.push(e.src),o.attrs.src||(o.attrs.src=e.src)),void this._tagStack.push(s)}e.style=a+e.style,blockTag[t]?t="div":trustTag.hasOwnProperty(t)||(t="span"),s.name=t,s.attrs=e,this._addDomElement(s),this._tagStack.push(s)},DomHandler.prototype.ontext=function(t){if(!this._whiteSpace){if(!/\S/.test(t))return;t=t.replace(/\s+/g," ")}emoji&&(t=emoji.parseEmoji(t));var e={text:t.replace(/&nbsp;/g," "),type:"text"};/&#*((?!sp|lt|gt).){2,5};/.test(t)&&(e.decode=!0),this._addDomElement(e)},DomHandler.prototype.onclosetag=function(t){var e=this._tagStack.pop(),s=this._tagStack.length?this._tagStack[this._tagStack.length-1].children:this.nodes;if(ignoreTag[t]){if("title"==t)try{this.title=e.children[0].text}catch(t){}s.pop()}if(1==e.children.length&&"div"==e.name){var a=e.children[0];"div"!=a.name||/padding/.test(e.attrs.style)||/margin/.test(e.attrs.style)&&/margin/.test(a.attrs.style)||/display/.test(e.attrs.style)||/display/.test(a.attrs.style)||e.attrs.id&&a.attrs.id||e.attrs.class&&a.attrs.class||(/padding/.test(a.attrs.style)&&(a.attrs.style=";box-sizing:border-box;"+a.attrs.style),a.attrs.style=e.attrs.style+";"+a.attrs.style,a.attrs.id=(a.attrs.id||"")+(e.attrs.id||""),a.attrs.class=(a.attrs.class||"")+(e.attrs.class||""),s[s.indexOf(e)]=a)}if(e.pre){this._whiteSpace=!1;var r=!0,i=!1,o=void 0;try{for(var l,n=this._tagStack[Symbol.iterator]();!(r=(l=n.next()).done);r=!0){l.value.pre&&(this._whiteSpace=!0)}}catch(t){i=!0,o=t}finally{try{!r&&n.return&&n.return()}finally{if(i)throw o}}delete e.pre}this._CssHandler.pop&&this._CssHandler.pop(e)},module.exports=DomHandler;
+function DomHandler(style, tagStyle = {}) {
+  this.imgList = [];
+  this.nodes = [];
+  this.title = "";
+  this._videoNum = 0;
+  this._audioNum = 0;
+  this._style = new CssTokenizer(style, initStyle(tagStyle)).parse();
+  this._tagStack = [];
+}
+DomHandler.prototype._addDomElement = function(element) {
+  const parent = this._tagStack[this._tagStack.length - 1];
+  const siblings = parent ? parent.children : this.nodes;
+  siblings.push(element);
+};
+DomHandler.prototype._bubbling = function() {
+  for (let i = this._tagStack.length - 1; i >= 0; i--) {
+    if (trustTag[this._tagStack[i].name] == Common) this._tagStack[i].continue = true;
+    else return this._tagStack[i].name;
+  }
+}
+DomHandler.prototype.onopentag = function(name, attrs) {
+  const element = {
+    children: []
+  };
+  // 匹配样式
+  let matched = this._style[name] ? (this._style[name] + ';') : '';
+  if (attrs.id) {
+    matched += (this._style['#' + attrs.id] ? (this._style['#' + attrs.id] + ';') : '');
+    delete attrs.id;
+  }
+  if (attrs.class) {
+    for (const Class of attrs.class.split(' ')) {
+      matched += (this._style['.' + Class] ? (this._style['.' + Class] + ';') : '');
+    }
+    delete attrs.class;
+  }
+  // 处理属性
+  switch (name) {
+    case 'div':
+    case 'p':
+      if (attrs.align) {
+        attrs.style += (';text-align:' + attrs.align);
+        delete attrs.align;
+      }
+      break;
+    case 'img':
+      if (attrs.width) {
+        attrs.style = 'width:' + attrs.width + (/[0-9]/.test(attrs.width[attrs.width.length - 1]) ? 'px' : '') + ';' + attrs.style;
+        delete attrs.width;
+      }
+      if (attrs['data-src']) {
+        attrs.src = attrs.src || attrs['data-src'];
+        delete attrs['data-src'];
+      }
+      if (!attrs.hasOwnProperty('ignore') && attrs.src) {
+        this.imgList.push(attrs.src);
+        if (this._bubbling() == 'a') attrs.ignore = "";
+      };
+      break;
+    case 'font':
+      name = 'span';
+      if (attrs.color) {
+        attrs.style += (';color:' + attrs.color);
+        delete attrs.color;
+      }
+      if (attrs.face) {
+        attrs.style += (";font-family:" + attrs.face);
+        delete attrs.face;
+      }
+      if (attrs.size) {
+        let size = parseInt(attrs.size);
+        if (size < 1) size = 1;
+        else if (size > 7) size = 7;
+        switch (size) {
+          case 1:
+            size = 10;
+            break;
+          case 2:
+            size = 13;
+            break;
+          case 3:
+            size = 16;
+            break;
+          case 4:
+            size = 18;
+            break;
+          case 5:
+            size = 24;
+            break;
+          case 6:
+            size = 32;
+            break;
+          case 7:
+            size = 48;
+            break;
+        }
+        attrs.style += (";font-size:" + size + "px");
+        delete attrs.size;
+      }
+      break;
+    case 'a':
+      this._bubbling();
+      break;
+    case 'video':
+    case 'audio':
+      attrs.loop = attrs.hasOwnProperty('loop');
+      attrs.controls = attrs.hasOwnProperty('controls');
+      attrs.autoplay = attrs.hasOwnProperty('autoplay');
+      if (name == 'video') {
+        attrs.muted = attrs.hasOwnProperty('muted');
+        if (attrs.width) {
+          attrs.style = 'width:' + parseFloat(attrs.width) + 'px;' + attrs.style;
+          delete attrs.width;
+        }
+        if (attrs.height) {
+          attrs.style = 'height:' + parseFloat(attrs.height) + 'px;' + attrs.style;
+          delete attrs.height;
+        }
+      }
+      attrs.id = (name + (++this['_' + name + 'Num']));
+      attrs.source = [];
+      if (attrs.src) attrs.source.push(attrs.src);
+      if (!attrs.controls && !attrs.autoplay)
+        console.warn('存在没有controls属性的' + name + '标签，可能导致无法播放', attrs);
+      this._bubbling();
+      break;
+    case 'source':
+      const parent = this._tagStack[this._tagStack.length - 1];
+      if (parent && (parent.name == 'video' || parent.name == 'audio')) {
+        parent.attrs.source.push(attrs.src);
+        if (!parent.attrs.src) parent.attrs.src = attrs.src;
+      }
+      this._tagStack.push(element);
+      return;
+  }
+  attrs.style = matched + attrs.style;
+  if (textTag[name]) element.continue = true;
+  else if (blockTag[name]) name = 'div';
+  else if (!trustTag[name]) name = 'span';
+  element.name = name;
+  element.attrs = attrs;
+  this._addDomElement(element);
+  this._tagStack.push(element);
+};
+DomHandler.prototype.ontext = function(data) {
+  if (/\S/.test(data)) {
+    const element = {
+      text: data.replace(/&nbsp;/g, '\u00A0'),
+      type: 'text'
+    };
+    if (/&#*((?!sp|lt|gt).){2,5};/.test(data)) element.decode = true;
+    this._addDomElement(element);
+  }
+};
+DomHandler.prototype.onclosetag = function(name) {
+  const element = this._tagStack.pop();
+  if (ignoreTag[name]) {
+    if (name == 'title') {
+      try {
+        this.title = element.children[0].text;
+      } catch (e) {}
+    }
+    const parent = this._tagStack[this._tagStack.length - 1];
+    const siblings = parent ? parent.children : this.nodes;
+    siblings.pop();
+  }
+};
+module.exports = DomHandler;

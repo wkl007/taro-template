@@ -37,7 +37,7 @@ export function throttle (func: Function, gapTime: number): Function {
   let _lastTime = 0
 
   return function () {
-    let _nowTime = +new Date()
+    const _nowTime = +new Date()
     if (_nowTime - _lastTime > gapTime || !_lastTime) {
       func()
       _lastTime = _nowTime
@@ -70,7 +70,7 @@ export function bubble_sort (arr: Array<number>, fn: Function): Array<number> {
  * @param date
  * @param format
  */
-export function dateFormat (date?: ConfigType, format: string = 'YYYY-MM-DD HH:mm:ss'): string {
+export function dateFormat (date?: ConfigType, format = 'YYYY-MM-DD HH:mm:ss'): string {
   return dayjs(date).format(format)
 }
 
@@ -79,7 +79,7 @@ export function dateFormat (date?: ConfigType, format: string = 'YYYY-MM-DD HH:m
  * @param number
  * @param format
  */
-export function numberFormat (number: number, format: string = '0,00.00'): string | undefined {
+export function numberFormat (number: number, format = '0,00.00'): string | undefined {
   if (!number) return
   return numeral(number).format(format)
 }

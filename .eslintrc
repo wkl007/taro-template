@@ -1,7 +1,9 @@
 {
   "extends": [
-    "taro"
+    "taro",
+    "plugin:@typescript-eslint/recommended"
   ],
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "import/no-commonjs": 0,
     "import/prefer-default-export": 0,
@@ -35,9 +37,24 @@
     "react/no-direct-mutation-state": 0,
     "react/no-unused-state": 0,
     "react/sort-comp": 0,
-    "spaced-comment": 2
+    "spaced-comment": 2,
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "Taro"
+      }
+    ],
+    "@typescript-eslint/member-delimiter-style": 0,
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/camelcase": 0,
+    "@typescript-eslint/no-empty-function": [
+      "warn"
+    ],
+    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/ban-ts-ignore": 0,
+    "@typescript-eslint/no-empty-interface": 0
   },
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true

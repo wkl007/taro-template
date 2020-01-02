@@ -48,7 +48,7 @@ class ReduxPage extends Component {
 
   changeUserInfo = () => {
     const { setUserInfo } = this.props
-    let data = {
+    const data = {
       name: `小王${Math.random() * 10}`
     }
     setUserInfo(data)

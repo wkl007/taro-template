@@ -1,10 +1,8 @@
-import Taro from '@tarojs/taro'
-
 function withShare (opts: { title?: string; imageUrl?: string, path?: string } = {}) {
 
   // 设置默认
-  const defalutPath = '/pages/index/index'
-  const defalutTitle = '首页'
+  const defaultPath = '/pages/index/index'
+  const defaultTitle = '首页'
   const defaultImageUrl = 'http://thumb10.jfcdns.com/2018-06/bce5b10ae530f530.png'
 
   return function demoComponent (Component) {
@@ -32,13 +30,13 @@ function withShare (opts: { title?: string; imageUrl?: string, path?: string } =
           imageUrl = this.$setShareImageUrl()
         }
         if (!path) {
-          path = defalutPath
+          path = defaultPath
         }
 
         console.log(path)
         return {
-          title: title || defalutTitle,
-          path: path || defalutPath,
+          title: title || defaultTitle,
+          path: path || defaultPath,
           imageUrl: imageUrl || defaultImageUrl
         }
       }

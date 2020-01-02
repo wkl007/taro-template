@@ -1,3 +1,158 @@
-"use strict";function Parser(t,e){this._cbs=t,this._callback=e,this._tagname="",this._attribname="",this._attribvalue="",this._attribs=null,this._stack=[],this._tokenizer=new Tokenizer(this)}function html2nodes(t,e){return new Promise(function(s,a){try{var i="";t=t.replace(/<style.*?>([\s\S]*?)<\/style>/gi,function(){return i+=arguments[1],""});new Parser(new DomHandler(i,e),function(t){return s(t)}).write(t)}catch(t){return a(t)}})}var Tokenizer=require("./Tokenizer.js"),DomHandler=require("./DomHandler.js"),trustAttrs={align:!0,alt:!0,author:!0,autoplay:!0,class:!0,color:!0,colspan:!0,controls:!0,"data-src":!0,dir:!0,face:!0,height:!0,href:!0,id:!0,ignore:!0,loop:!0,muted:!0,name:!0,poster:!0,rowspan:!0,size:!0,span:!0,src:!0,start:!0,style:!0,type:!0,"unit-id":!0,width:!0},voidTag={area:!0,base:!0,basefont:!0,br:!0,col:!0,circle:!0,command:!0,ellipse:!0,embed:!0,frame:!0,hr:!0,img:!0,input:!0,isindex:!0,keygen:!0,line:!0,link:!0,meta:!0,param:!0,path:!0,polygon:!0,polyline:!0,rect:!0,source:!0,stop:!0,track:!0,use:!0,wbr:!0};
+// Parser.js
+const Tokenizer = require("./Tokenizer.js");
+const DomHandler = require("./DomHandler.js");
 
-Parser.prototype.ontext=function(t){this._cbs.ontext(t)},Parser.prototype.onopentagname=function(t){t=t.toLowerCase(),this._tagname=t,this._attribs={style:""},voidTag[t]||this._stack.push(t)},Parser.prototype.onopentagend=function(){this._attribs&&(this._cbs.onopentag(this._tagname,this._attribs),this._attribs=null),voidTag[this._tagname]&&this._cbs.onclosetag(this._tagname),this._tagname=""},Parser.prototype.onclosetag=function(t){if(t=t.toLowerCase(),this._stack.length&&!voidTag[t]){var e=this._stack.lastIndexOf(t);if(-1!==e)for(e=this._stack.length-e;e--;)this._cbs.onclosetag(this._stack.pop());else"p"===t&&(this.onopentagname(t),this._closeCurrentTag())}else"br"!==t&&"hr"!==t&&"p"!==t||(this.onopentagname(t),this._closeCurrentTag())},Parser.prototype._closeCurrentTag=function(){var t=this._tagname;this.onopentagend(),this._stack[this._stack.length-1]===t&&(this._cbs.onclosetag(t),this._stack.pop())},Parser.prototype.onattribend=function(){this._attribvalue=this._attribvalue.replace(/&quot;/g,'"'),this._attribs&&trustAttrs[this._attribname]&&(this._attribs[this._attribname]=this._attribvalue),this._attribname="",this._attribvalue=""},Parser.prototype.onend=function(){for(var t=this._stack.length;t>0;this._cbs.onclosetag(this._stack[--t]));this._callback({nodes:this._cbs.nodes,title:this._cbs.title,imgList:this._cbs.imgList})},Parser.prototype.write=function(t){this._tokenizer.parse(t)},module.exports=html2nodes;
+const trustAttrs = {
+  align: true,
+  alt: true,
+  author: true,
+  autoplay: true,
+  class: true,
+  color: true,
+  colspan: true,
+  controls: true,
+  "data-src": true,
+  dir: true,
+  face: true,
+  height: true,
+  href: true,
+  id: true,
+  ignore: true,
+  loop: true,
+  muted: true,
+  name: true,
+  poster: true,
+  rowspan: true,
+  size: true,
+  span: true,
+  src: true,
+  start: true,
+  style: true,
+  type: true,
+  width: true,
+};
+const voidTag = {
+  area: true,
+  base: true,
+  basefont: true,
+  br: true,
+  col: true,
+  circle: true,
+  command: true,
+  ellipse: true,
+  embed: true,
+  frame: true,
+  hr: true,
+  img: true,
+  input: true,
+  isindex: true,
+  keygen: true,
+  line: true,
+  link: true,
+  meta: true,
+  param: true,
+  path: true,
+  polygon: true,
+  polyline: true,
+  rect: true,
+  source: true,
+  stop: true,
+  track: true,
+  use: true,
+  wbr: true
+};
+
+function Parser(cbs, callback) {
+  this._cbs = cbs;
+  this._callback = callback;
+  this._tagname = "";
+  this._attribname = "";
+  this._attribvalue = "";
+  this._attribs = null;
+  this._stack = [];
+  this._tokenizer = new Tokenizer(this);
+}
+Parser.prototype.ontext = function(data) {
+  this._cbs.ontext(data);
+};
+Parser.prototype.onopentagname = function(name) {
+  name = name.toLowerCase();
+  this._tagname = name;
+  this._attribs = {
+    style: ''
+  };
+  if (!voidTag[name]) this._stack.push(name);
+};
+Parser.prototype.onopentagend = function() {
+  if (this._attribs) {
+    this._cbs.onopentag(this._tagname, this._attribs);
+    this._attribs = null;
+  }
+  if (voidTag[this._tagname]) this._cbs.onclosetag(this._tagname);
+  this._tagname = "";
+};
+Parser.prototype.onclosetag = function(name) {
+  name = name.toLowerCase();
+  if (this._stack.length && !voidTag[name]) {
+    let pos = this._stack.lastIndexOf(name);
+    if (pos !== -1) {
+      pos = this._stack.length - pos;
+      while (pos--) this._cbs.onclosetag(this._stack.pop());
+    } else if (name === "p") {
+      this.onopentagname(name);
+      this._closeCurrentTag();
+    }
+  } else if (name === "br" || name === "hr" || name === "p") {
+    this.onopentagname(name);
+    this._closeCurrentTag();
+  }
+};
+Parser.prototype._closeCurrentTag = function() {
+  const name = this._tagname;
+  this.onopentagend();
+  if (this._stack[this._stack.length - 1] === name) {
+    this._cbs.onclosetag(name);
+    this._stack.pop();
+  }
+};
+Parser.prototype.onattribend = function() {
+  this._attribvalue = this._attribvalue.replace(/&quot;/g, '"');
+  if (this._attribs && trustAttrs[this._attribname]) {
+    this._attribs[this._attribname] = this._attribvalue;
+  }
+  this._attribname = "";
+  this._attribvalue = "";
+};
+Parser.prototype.onend = function() {
+  for (
+    let i = this._stack.length; i > 0; this._cbs.onclosetag(this._stack[--i])
+  );
+  this._callback({
+    'nodes': this._cbs.nodes,
+    'title': this._cbs.title,
+    'imgList': this._cbs.imgList
+  });
+};
+Parser.prototype.write = function(chunk) {
+  this._tokenizer.parse(chunk);
+};
+
+function html2nodes(data, tagStyle) {
+  return new Promise(function(resolve, reject) {
+    try {
+      let style = '';
+      data = data.replace(/<style.*?>([\s\S]*?)<\/style>/gi, function() {
+        // eslint-disable-next-line prefer-rest-params
+        style += arguments[1];
+        return '';
+      });
+      const handler = new DomHandler(style, tagStyle);
+      new Parser(handler, (res) => {
+        return resolve(res);
+      }).write(data);
+    } catch (err) {
+      return reject(err);
+    }
+  })
+}
+module.exports = html2nodes;

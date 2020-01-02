@@ -1,10 +1,10 @@
 import Taro from '@tarojs/taro'
 
-export const LOGIN_STATUS: string = 'LOGIN_STATUS' // 当前用户登录状态
+export const LOGIN_STATUS = 'LOGIN_STATUS' // 当前用户登录状态
 
-export const USER_INFO: string = 'User_Info' // 用户信息
+export const USER_INFO = 'User_Info' // 用户信息
 
-export const ACCESS_TOKEN: string = 'Access_Token' // token
+export const ACCESS_TOKEN = 'Access_Token' // token
 
 export function setStorageSync (key: string, data: string | any): void {
   Taro.setStorageSync(key, data)

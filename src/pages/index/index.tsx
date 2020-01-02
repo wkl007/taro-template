@@ -13,7 +13,7 @@ import { getBannerList } from '@/api'
 import './index.scss'
 
 @withShare({})
-class Index extends Component {
+class IndexPage extends Component {
 
   /**
    * 指定config的类型声明为: Taro.Config
@@ -45,7 +45,7 @@ class Index extends Component {
           loading={false}
         />
         <Header/>
-        <UIcon size={100} color='red' icon='icon-chongzhi'/>
+        <UIcon size={100} color='orange' icon='icon-chongzhi'/>
         <AtButton type='primary' onClick={() => this.goPage('redux')}>
           redux测试
         </AtButton>
@@ -73,4 +73,4 @@ class Index extends Component {
   }
 }
 
-export default Index
+export default IndexPage

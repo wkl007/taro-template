@@ -1,25 +1,19 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Editor directories and files
+.idea
+.vscode
+.temp/
+.rn_temp/
+.DS_Store
+deploy_versions/
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
+node_modules/
 
 # production
 /dist
 
+# Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 yarn.lock
-
-.idea
-
-dist/
-.temp/
-.rn_temp/
-node_modules/
-.DS_Store
