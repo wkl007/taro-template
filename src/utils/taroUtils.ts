@@ -123,6 +123,7 @@ export function taroUploadFile (data: { url: string; filePath: string; fileName:
       url,
       filePath,
       name: fileName,
+      fileName: fileName,
       header: {
         'Content-Type': 'multipart/form-data',
       },

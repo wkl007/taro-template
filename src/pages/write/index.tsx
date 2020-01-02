@@ -45,7 +45,7 @@ export default class Write extends Component {
   // 初始化canvas
   initCanvas = () => {
     const canvasName = this.state.canvasName
-    this.ctx = Taro.createCanvasContext(canvasName, '')
+    this.ctx = Taro.createCanvasContext(canvasName)
     const query = Taro.createSelectorQuery()
     query.select('.handCenter').boundingClientRect((rect: any) => {
       this.setState({
@@ -66,14 +66,14 @@ export default class Write extends Component {
   // 笔迹开始
   uploadScaleStart = (e: any) => {
     if (e.type != 'touchstart') return false
-    let ctx = this.ctx
+    const ctx = this.ctx
     ctx.setFillStyle(this.state.lineColor)  // 初始线条设置颜色
     ctx.setGlobalAlpha(this.state.transparent)  // 设置半透明
-    let currentPoint = {
+    const currentPoint = {
       x: e.touches[0].x,
       y: e.touches[0].y
     }
-    let currentLine: any = this.state.currentLine
+    const currentLine: any = this.state.currentLine
     currentLine.unshift({
       time: new Date().getTime(),
       dis: 0,
@@ -102,7 +102,7 @@ export default class Write extends Component {
         e.preventDefault()
       }
     }
-    let point = {
+    const point = {
       x: e.touches[0].x,
       y: e.touches[0].y
     }
@@ -134,7 +134,7 @@ export default class Write extends Component {
       lastPoint: this.state.currentPoint,
       currentPoint: point
     })
-    let currentLine: any = this.state.currentLine
+    const currentLine: any = this.state.currentLine
     currentLine.unshift({
       time: new Date().getTime(),
       dis: this.distance(this.state.currentPoint, this.state.lastPoint),
@@ -150,7 +150,7 @@ export default class Write extends Component {
   // 笔迹结束
   uploadScaleEnd = (e: any) => {
     if (e.type != 'touchend') return 0
-    let point = {
+    const point = {
       x: e.changedTouches[0].x,
       y: e.changedTouches[0].y
     }
@@ -158,7 +158,7 @@ export default class Write extends Component {
       lastPoint: this.state.currentPoint,
       currentPoint: point
     })
-    let currentLine: any = this.state.currentLine
+    const currentLine: any = this.state.currentLine
     currentLine.unshift({
       time: new Date().getTime(),
       dis: this.distance(this.state.currentPoint, this.state.lastPoint),
@@ -169,22 +169,22 @@ export default class Write extends Component {
     //   currentLine
     // })
     if (currentLine.length > 2) {
-      var info = (currentLine[0].time - currentLine[currentLine.length - 1].time) / currentLine.length
+      const info = (currentLine[0].time - currentLine[currentLine.length - 1].time) / currentLine.length
       // $("#info").text(info.toFixed(2));
     }
     // 一笔结束，保存笔迹的坐标点，清空，当前笔迹
     // 增加判断是否在手写区域；
     this.pointToLine(currentLine)
-    var currentChirography = {
+    const currentChirography = {
       lineSize: this.state.lineSize,
       lineColor: this.state.lineColor
     }
-    var chirography: any = this.state.chirography
+    const chirography: any = this.state.chirography
     chirography.unshift(currentChirography)
     this.setState({
       chirography
     })
-    var linePrack: any = this.state.linePrack
+    const linePrack: any = this.state.linePrack
     linePrack.unshift(this.state.currentLine)
     this.setState({
       linePrack,
@@ -210,7 +210,9 @@ export default class Write extends Component {
       Taro.canvasToTempFilePath({
         x: 0,
         y: 0,
+        canvas: canvasName,
         canvasId: canvasName,
+        quality: 1,
         success: res => {
           taroDownload(res.tempFilePath).then(res => {
             Taro.showToast({
@@ -280,16 +282,16 @@ export default class Write extends Component {
       r1 = line[1].r
       r2 = (line[1].r + line[0].r) / 2
     }
-    let n = 5
+    const n = 5
     let point: Array<any> = []
     for (let i = 0; i < n; i++) {
-      let t = i / (n - 1)
-      let x = (1 - t) * (1 - t) * x0 + 2 * t * (1 - t) * x1 + t * t * x2
-      let y = (1 - t) * (1 - t) * y0 + 2 * t * (1 - t) * y1 + t * t * y2
-      let r = lastRadius + (this.state.radius - lastRadius) / n * i
+      const t = i / (n - 1)
+      const x = (1 - t) * (1 - t) * x0 + 2 * t * (1 - t) * x1 + t * t * x2
+      const y = (1 - t) * (1 - t) * y0 + 2 * t * (1 - t) * y1 + t * t * y2
+      const r = lastRadius + (this.state.radius - lastRadius) / n * i
       point.push({ x: x, y: y, r: r })
       if (point.length == 3) {
-        let a = this.ctaCalc(point[0].x, point[0].y, point[0].r, point[1].x, point[1].y, point[1].r, point[2].x, point[2].y, point[2].r)
+        const a = this.ctaCalc(point[0].x, point[0].y, point[0].r, point[1].x, point[1].y, point[1].r, point[2].x, point[2].y, point[2].r)
         a[0].color = this.state.lineColor
         // let bethelPoint = this.state.bethelPoint;
         // bethelPoint = bethelPoint.push(a);
@@ -304,8 +306,8 @@ export default class Write extends Component {
 
   // 求两点之间距离
   distance = (a, b) => {
-    let x = b.x - a.x
-    let y = b.y - a.y
+    const x = b.x - a.x
+    const y = b.y - a.y
     return Math.sqrt(x * x + y * y)
   }
 
@@ -366,7 +368,7 @@ export default class Write extends Component {
   }
 
   bethelDraw = (point: any, is_fill: any, color?: string) => {
-    let ctx = this.ctx
+    const ctx = this.ctx
     ctx.beginPath()
     ctx.moveTo(point[0].mx, point[0].my)
     if (undefined != color) {
